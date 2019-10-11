@@ -23,12 +23,19 @@ namespace VendorTracker.Tests
         [TestCleanup]
         public void TearDown()
         {
-
+            Vendor.ClearAll();
         }
         [TestMethod]
         public void Constructor_ConstructorBuildsClass_Vendor()
         {
             Assert.AreEqual(newVendor.GetType(),typeof(Vendor));
+        }
+        [TestMethod]
+        public void GetAll_ReturnsAllInstancesofVendor_List()
+        {
+            List<Vendor> expectedList = new List<Vendor>{newVendor};
+            List<Vendor> actualList = Vendor.GetAll();
+            CollectionAssert.AreEqual(expectedList,actualList);
         }
     }
 }

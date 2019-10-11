@@ -17,5 +17,13 @@ namespace VendorTracker.Models
             _allVendors.Add(this);
             Orders = new List<Order> {};
         }
+        public static void ClearAll()
+        {
+            _allVendors.Clear();
+        }
+        public static List<Vendor> GetAll()
+        {
+            return _allVendors;
+        }
     }
 }
