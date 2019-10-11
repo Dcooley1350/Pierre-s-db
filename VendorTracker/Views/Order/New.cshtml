@@ -1,0 +1,22 @@
+@using VendorTracker.Models;
+<h1>Pierre's</h1>
+<h2>Add a new Order for @Model.venName</h2>
+
+<form action="/vendor/@Model.Id/order" method="post">
+  <input id="vendorId" name="vendorId" type="hidden" value="@Model.Id">
+  <label for="title">Title</label>
+  <input id="title" name="title" type="text">
+
+  <label for="description">Description:</label>
+  <input id="description" name="description" type="text">
+  
+  <label for="price">Price:</label>
+  <input id="price" name="price" type="number">
+
+  <label for="date">Date:</label>
+  <input id="date" name="date" type="text">
+  <button type="submit" class="submit success">Submit</button>
+</form>
+
+<p><a href='/vendor'>Vendors</a></p>
+<p><a href="/">Back Home</a></p>
