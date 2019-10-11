@@ -45,5 +45,12 @@ namespace VendorTracker.Tests
             List<Order> gotAll = Order.GetAll();
             CollectionAssert.AreEqual(emptyList,gotAll);
         }
+        [TestMethod]
+        public void Find_AbleToFindElementById_Order()
+        {
+            int expectedID = 1;
+            Order foundOrder = Order.Find(expectedID);
+            Assert.AreEqual(newOrder,foundOrder);
+        }
     }
 }

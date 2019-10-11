@@ -24,5 +24,9 @@ namespace VendorTracker.Models
         {
             _orders.Clear();
         }
+        public static Order Find(int Id)
+        {
+            return _orders[Id-1];
+        }
     }
 }
