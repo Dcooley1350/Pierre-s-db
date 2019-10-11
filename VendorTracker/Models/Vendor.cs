@@ -8,7 +8,7 @@ namespace VendorTracker.Models
         public string VenName { get; set; }
         public string VenDescription { get; set; }
         private static List<Vendor> _allVendors = new List<Vendor> {};
-        private int Id { get; }
+        public int Id { get; }
         public List <Order> Orders { get; set; }
 
         public Vendor(string venName, string venDescription)
