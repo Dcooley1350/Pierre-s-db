@@ -23,7 +23,12 @@ namespace VendorTracker.Tests
         [TestCleanup]
         public void TearDown()
         {
-            
+
+        }
+        [TestMethod]
+        public void Constructor_ConstructorBuildsClass_Vendor()
+        {
+            Assert.AreEqual(newVendor.GetType(),typeof(Vendor));
         }
     }
 }
