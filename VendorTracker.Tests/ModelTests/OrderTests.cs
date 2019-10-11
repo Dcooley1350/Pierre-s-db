@@ -9,16 +9,20 @@ namespace VendorTracker.Tests
     [TestClass]
     public class OrderTest
     {
-        int breads;
-        int pastries;
+            string name;
+            string description;
+            int price;
+            string date;
         Order newOrder;
 
         [TestInitialize]
         public void Setup()
         {
-            breads = 3;
-            pastries = 5;
-            newOrder = new Order(breads,pastries);
+            name = "BigMuffuginOrder";
+            description ="SeeName";
+            price = 30;
+            date = "10/10/2019";
+            newOrder = new Order(name,description,price,date);
         }
         [TestCleanup]
         public void TearDown()
