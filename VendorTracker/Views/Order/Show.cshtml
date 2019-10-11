@@ -1,1 +1,9 @@
+@using VendorTracker.Models;
+
 <h1>Pierre's</h1>
+<h2>@Model["order"].Title</h2>
+<h3>@Model["order"].Description</h3>
+<h3>@Model["order"].Price</h3>
+<h3>@Model["order"].Date</h3>
+<p><a href='/vendors'>Vendors</a></p>
+<p><a href="/">Back Home</a></p>
