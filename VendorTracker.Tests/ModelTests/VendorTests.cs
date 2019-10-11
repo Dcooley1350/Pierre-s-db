@@ -9,15 +9,21 @@ namespace VendorTracker.Tests
     [TestClass]
     public class VendorTest
     {
+        string venName;
+        string venDescription;
+        Vendor newVendor;
+
         [TestInitialize]
         public void Setup()
         {
-
+            venName = "John McClane";
+            venDescription = "One bad muffugga.";
+            newVendor = new Vendor(venName,venDescription);
         }
         [TestCleanup]
         public void TearDown()
         {
-
+            
         }
     }
 }
