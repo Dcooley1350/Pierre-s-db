@@ -30,5 +30,20 @@ namespace VendorTracker.Tests
         {
             Assert.AreEqual(newOrder.GetType(),typeof(Order));
         }
+        [TestMethod]
+        public void GetAll_ReturnsAllOrderInList_List()
+        {
+            List<Order> expectedList = new List<Order>{newOrder};
+            List<Order> gotAll = Order.GetAll();
+            CollectionAssert.AreEqual(gotAll,expectedList);
+        }
+        [TestMethod]
+        public void ClearAll_ClearsAllOrdersInList_List()
+        {
+            List<Order> emptyList = new List<Order> {};
+            Order.ClearAll();
+            List<Order> gotAll = Order.GetAll();
+            CollectionAssert.AreEqual(emptyList,gotAll);
+        }
     }
 }
