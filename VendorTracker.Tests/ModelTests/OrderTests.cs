@@ -3,16 +3,25 @@ using VendorTracker.Models;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using MySql.Data.MySqlClient;
 
 namespace VendorTracker.Tests
 {
     [TestClass]
-    public class OrderTest
+    public class OrderTest : IDisposable
     {
-            string name;
-            string description;
-            int price;
-            string date;
+        public void Dispose()
+        {
+            Order.ClearAll();
+        }
+        public OrderTest()
+        {
+            DBConfiguration.ConnectionString = "server=localhost;user id=root;password=epicodus;port=3306;database=vendortracker_test;";
+        }
+        string name;
+        string description;
+        int price;
+        string date;
         Order newOrder;
 
         [TestInitialize]
@@ -24,11 +33,17 @@ namespace VendorTracker.Tests
             date = "10/10/2019";
             newOrder = new Order(name,description,price,date);
         }
-        [TestCleanup]
-        public void TearDown()
+      
+
+
+        [TestMethod]
+        public void GetAll_RetrunsEmptyListFromDataBase_OrderList()
         {
-            Order.ClearAll();
+            List<Order> newList = new List<Order> {};
+            List<Order> result = Order.GetAll();
+            CollectionAssert.AreEqual(newList, result);
         }
+        
         [TestMethod]
         public void Constructor_ConstructorBuildsInstance_Order()
         {
@@ -37,7 +52,7 @@ namespace VendorTracker.Tests
         [TestMethod]
         public void GetAll_ReturnsAllOrderInList_List()
         {
-            List<Order> expectedList = new List<Order>{newOrder};
+            List<Order> expectedList = new List<Order>{};
             List<Order> gotAll = Order.GetAll();
             CollectionAssert.AreEqual(gotAll,expectedList);
         }

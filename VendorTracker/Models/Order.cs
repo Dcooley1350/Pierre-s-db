@@ -1,36 +1,75 @@
 using System;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 
 namespace VendorTracker.Models
 {
     public class Order
     {
+        public int Id { get; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
         public string Date {get; set;}
-        public int Id { get; }
-        private static List<Order> _orders = new List<Order> {}; 
         public Order(string title, string description, int price, string date)
         {
             Title = title;
             Description = description;
             Price = price;
             Date = date;
-            _orders.Add(this);
-            Id = _orders.Count;
+            
+        }
+        public Order(string title, string description, int price, string date, int id)
+        {
+            Title = title;
+            Description = description;
+            Price = price;
+            Date = date;
+            Id = id;
+            
         }
         public static List<Order> GetAll()
         {
-            return _orders;
+            List<Order> allOrders = new List<Order> {};
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"Select * From orders;";
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while (rdr.Read())
+            {
+                int orderID = rdr.GetInt32(0);
+                string title = rdr.GetString(1);
+                string orderDescription = rdr.GetString(2);
+                int price = rdr.GetInt32(3);
+                string date = rdr.GetString(4);
+                Order newOrder = new Order(title, orderDescription, price, date, orderID);
+                allOrders.Add(newOrder);
+            }
+            conn.Close();
+            if(conn != null)
+            {
+                conn.Dispose();
+            }
+            return allOrders;
         }
         public static void ClearAll()
         {
-            _orders.Clear();
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM orders;";
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
         }
         public static Order Find(int Id)
         {
-            return _orders[Id-1];
+            Order placeholder = new Order("temp", "temp", 0, "0/0/0");
+            return placeholder;
         }
     }
 }
