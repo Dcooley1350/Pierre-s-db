@@ -37,6 +37,7 @@ namespace VendorTracker.Controllers
         {
             Dictionary<string, object> model = new Dictionary<string, object> {};
             Order newOrder = new Order(title, description, price, date);
+            newOrder.Save();
             Vendor foundVendor = Vendor.Find(vendorId);
             foundVendor.AddOrder(newOrder);
             List<Order> orders = foundVendor.Orders;
