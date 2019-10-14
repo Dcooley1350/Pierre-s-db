@@ -33,7 +33,17 @@ namespace VendorTracker.Tests
             date = "10/10/2019";
             newOrder = new Order(name,description,price,date);
         }
-      
+        
+        [TestMethod]
+        public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Item()
+        {
+        // Arrange, Act
+        Order firstOrder= new Order("name","Mow the lawn",32,"today");
+        Order secondOrder = new Order("name","Mow the lawn",32,"today");
+
+        // Assert
+        Assert.AreEqual(firstOrder, secondOrder);
+        }
 
 
         [TestMethod]
@@ -67,9 +77,24 @@ namespace VendorTracker.Tests
         [TestMethod]
         public void Find_AbleToFindElementById_Order()
         {
+            newOrder.Save();
             int expectedID = 1;
             Order foundOrder = Order.Find(expectedID);
+            Console.WriteLine(foundOrder.Title,foundOrder.Description,foundOrder.Id);
             Assert.AreEqual(newOrder,foundOrder);
+        }
+        [TestMethod]
+        public void Save_SavesToDatabase_OrderList()
+        {
+            //Arrange
+
+            //Act
+            newOrder.Save();
+            List<Order> result = Order.GetAll();
+            List<Order> testList = new List<Order>{newOrder};
+
+            //Assert
+            CollectionAssert.AreEqual(testList, result);
         }
     }
 }
